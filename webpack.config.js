@@ -1,12 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  mode: 'development', // O 'production'
+
   entry: './src/js/app.js',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      template: './src/index.html'
     }),
+    new MiniCssExtractPlugin(),
   ],
   output: {
     filename: 'bundle.js',
@@ -18,7 +22,14 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
       },
     ],
   },

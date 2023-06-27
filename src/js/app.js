@@ -1,5 +1,26 @@
 import './../styles.css';
-import { todo } from './todo';
-import {project} from './todo';
+import { showMenu, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm} from './ui';
 
 console.log("it still works don't worry");
+const btnMenu = document.querySelector(".header__button--menu");
+btnMenu.addEventListener("click", showMenu);
+
+const btnShowForm = document.querySelector(".header__button--addtask");
+
+btnShowForm.addEventListener("click", showAddTaskForm);
+
+const btnExit = document.querySelectorAll(".form__button--exit");
+
+btnExit.forEach(btnExit => {
+    btnExit.addEventListener("click", removeForm)
+});
+
+const btnShowProjectForm = document.querySelector(".aside__button");
+
+btnShowProjectForm.addEventListener("click", showAddProjectForm);
+
+const btnShowEditTaskForm = document.querySelectorAll(".main__button--edit");
+
+btnShowEditTaskForm.forEach(btnShowEditTaskForm => {
+    btnShowEditTaskForm.addEventListener("click", showEditTaskForm);
+});

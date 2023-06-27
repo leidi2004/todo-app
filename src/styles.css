@@ -1,0 +1,217 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./fonts/Roboto-Light.ttf');
+    font-weight: 400;
+}
+
+body {
+    font-family: 'Roboto';
+}
+
+button {
+    background: unset;
+    border: none;
+}
+
+.header {
+    background-color: #9b59b6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem;
+}
+
+aside {
+    display: none;
+}
+
+.aside-active {
+    display: block;
+    background-color: #f8f4f4;
+    position: absolute;
+    right: 75%;
+    left: 0;
+    width: 45%;
+    max-width: 300px;
+    height: 100vh;
+    padding: 1rem;
+}
+
+.aside__h3 {
+    margin: 0.5rem;
+}
+
+.aside__item,
+.aside__button {
+    margin-left: 2.5rem;
+}
+
+.aside__button {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    background-color: white;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    text-align: center;
+}
+
+.aside__button:hover {
+    background-color: aliceblue;
+}
+
+.main {
+    margin-left: 1rem;
+    padding: 2rem 0.5rem;
+}
+
+.main--center {
+    margin-left: 42%;
+    padding: 2.5rem 2rem;
+}
+
+.main__h2 {
+    margin-bottom: 1.2rem;
+}
+
+.main__container--task{
+    margin-bottom: 0.5rem;
+}
+
+.main__button--edit {
+    margin-left: 2rem;
+    margin-right: 0.4rem;
+}
+
+.task-name {
+    margin-left: 0.4rem;
+    font-size: 1.2rem;
+}
+
+.main__container--info {
+    display: none;
+}
+
+.main__container--info--visible {
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.7rem;
+    border: 2px solid #beaed4;
+    width: 60%;
+    max-width: 400px;
+}
+
+.title--info {
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.info {
+    margin-bottom: 0.5rem;
+}
+
+form {
+    display: none;
+}
+
+.body-lostfocus {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.form--addProject-visible {
+    display: block;
+    border-radius: 0.2rem;
+    background-color: #fff;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 60%;
+    max-width: 400px;
+    padding: 1.5rem 1rem;
+    animation: animacionFadeIn 0.8s 0.1s both;
+}
+
+.form__h3 {
+    margin-bottom: 0.5rem;
+}
+
+hr {
+    margin-bottom: 1rem;
+}
+
+.form__button--exit{
+    float: right;
+    font-size: 1.7rem;
+    text-align: center;
+    width: 25px;
+    margin-bottom: 1.5rem;
+}
+
+.form__input {
+    padding: 0.2rem;
+    font-size: 1rem;
+}
+
+.form-visible {
+    display: block;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    max-width: 600px;
+    padding: 1rem;
+    margin: 2rem auto;
+    animation: animacionFadeIn 0.4s both;
+}
+
+@keyframes animacionFadeIn{
+    0%{
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }100%{
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.form__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__input,
+select {
+    margin-bottom: 0.5rem;
+    padding: 0.4rem;
+    font-size: 1.1rem;
+    border: 1px solid #9b59b6;
+    border-radius: 0.1rem;
+}
+
+.form__label {
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+}
+
+.form__input--submit {
+    border: none;
+    border-radius: 0.2rem;
+    background-color: #beaed4;
+    color: #111;
+    float: right;
+    display: block;
+    margin-top: 1rem;
+    width: 100px;
+    padding: 0.4rem;
+    font-weight: bold;
+    padding: 0.6rem;
+}
+
+@media(min-width: 800px) {}
