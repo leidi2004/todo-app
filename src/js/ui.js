@@ -1,5 +1,5 @@
 import 'animate.css';
-
+import { project} from './todo';
 //Elements for the event listener of the menu
 const menu = document.querySelector("aside");
 const main = document.querySelector("main");
@@ -43,7 +43,7 @@ function showAddProjectForm() {
     formAddProject.classList.add("form--addProject-visible");
 }
 
-const formEditTask = document.querySelector(".form--edittask")
+const formEditTask = document.querySelector(".form--edittask");
 
 function showEditTaskForm() {
     formEditTask.classList.add("form-visible");
@@ -63,4 +63,25 @@ function removeForm() {
     }
 }
 
-export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm };
+function clearProjectForm() {
+    const projectName = document.getElementById("project-name").value = "";
+}
+
+function createProject(e) {
+    e.preventDefault();
+    const projectName = document.getElementById("project-name").value;
+    const pro = new project(projectName);
+    removeForm();
+    createElementProject(projectName);
+    clearProjectForm();
+}
+
+function createElementProject(element) {
+    const projectList = document.querySelector(".aside__ul");
+    const projectElement = document.createElement("li");
+    projectElement.innerHTML = element;
+    projectElement.classList.add("aside__item");
+    projectList.appendChild(projectElement);
+}
+
+export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, clearProjectForm };

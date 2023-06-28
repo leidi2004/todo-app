@@ -72,33 +72,39 @@ class project {
         this.projectName = projectName;
         this.todos = [];
     }
- 
+
     get projectName() {
         return this._projectName;
-      }
-    
-      set projectName(newName) {
-        this._projectName = newName;
-      }    
+    }
 
-    addTask(todo){
+    set projectName(newName) {
+        this._projectName = newName;
+    }
+
+    addTask(todo) {
         this.todos.push(todo);
+    }
+
+    showTasks() {
+        this.todos.forEach(todo => {
+            console.log(todo);
+        });
     }
 
     removeTask(todo) {
         const index = this.todos.indexOf(todo);
         if (index !== -1) {
-          this.todos.splice(index, 1);
+            this.todos.splice(index, 1);
         }
     }
 
-    deleteProject(){
+    deleteProject() {
         this.projectName = [];
     }
 
-    editProjectName(newName){
+    editProjectName(newName) {
         this.projectName = newName;
     }
 }
 
-export {todo, project};
+export { todo, project};
