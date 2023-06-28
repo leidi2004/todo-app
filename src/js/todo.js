@@ -74,12 +74,12 @@ class project {
     }
  
     get projectName() {
-        return this.projectName;
-    }
+        return this._projectName;
+      }
     
-    set projectName(newName) {
-        this.projectName = newName;
-    }
+      set projectName(newName) {
+        this._projectName = newName;
+      }    
 
     addTask(todo){
         this.todos.push(todo);

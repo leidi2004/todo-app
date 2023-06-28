@@ -27,36 +27,40 @@ function showMenu() {
 
 const formAddTask = document.querySelector(".form--addtask");
 const body = document.querySelector("body");
-function showAddTaskForm(){
+
+function showAddTaskForm() {
     formAddTask.classList.add("form-visible");
-    body.classList.add("body-lostfocus");
+    body.classList.add("lostfocus");
 }
 
 const formAddProject = document.querySelector(".form--addproject");
+const btnShowProjectForm = document.querySelector(".aside__button");
 
-function showAddProjectForm(){
-    menu.classList.remove("aside-active");
-    main.classList.remove("main--center");
-    body.classList.add("body-lostfocus");
+function showAddProjectForm() {
+    body.classList.add("lostfocus");
+    menu.classList.add("lostfocus");
+    btnShowProjectForm.classList.add("lostfocus");
     formAddProject.classList.add("form--addProject-visible");
 }
 
 const formEditTask = document.querySelector(".form--edittask")
 
-function showEditTaskForm(){
+function showEditTaskForm() {
     formEditTask.classList.add("form-visible");
-    body.classList.add("body-lostfocus");
+    body.classList.add("lostfocus");
 }
 
-function removeForm(){
-    body.classList.remove("body-lostfocus");
-    if(formAddTask.classList.contains("form-visible")){
+function removeForm() {
+    body.classList.remove("lostfocus");
+    if (formAddTask.classList.contains("form-visible")) {
         formAddTask.classList.remove("form-visible");
-    }else if(formAddProject.classList.contains("form--addProject-visible")){
-        formAddProject.classList.remove("form--addProject-visible"); 
-    }else if(formEditTask.classList.contains("form-visible")){
+    } else if (formAddProject.classList.contains("form--addProject-visible")) {
+        menu.classList.remove("lostfocus");
+        btnShowProjectForm.classList.remove("lostfocus");
+        formAddProject.classList.remove("form--addProject-visible");
+    } else if (formEditTask.classList.contains("form-visible")) {
         formEditTask.classList.remove("form-visible");
     }
 }
 
-export {showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm};
+export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm };
