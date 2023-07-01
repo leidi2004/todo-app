@@ -1,5 +1,5 @@
 import 'animate.css';
-import { project, todo} from './todo';
+import { project, todo } from './todo';
 //Elements for the event listener of the menu
 const menu = document.querySelector("aside");
 const main = document.querySelector("main");
@@ -72,7 +72,7 @@ const projectOptions = document.getElementById("project-option");
 const newLocation = document.getElementById("newLocation");
 
 function createProject(e) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const projectName = document.getElementById("project-name").value;
     const newProject = new project(projectName);
@@ -106,7 +106,7 @@ function createElementProject(element) {
 
 const title = document.querySelector(".main__h2");
 
-function showProject(){
+function showProject() {
     //el nombre del proyecto que fue clicado
     const projectName = this.innerHTML;
     title.innerHTML = projectName;
@@ -115,7 +115,7 @@ function showProject(){
     console.log(project.todos);
 }
 
-function newTask(e){
+function newTask(e) {
     e.preventDefault();
     const name = document.getElementById("task-name").value;
     const description = document.getElementById("task-description").value;
@@ -127,6 +127,76 @@ function newTask(e){
     project.todos.push(newTodo);
     console.log(newTodo);
     console.log(project.todos);
+    createTaskElement(newTodo);
 }
 
-export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, clearProjectForm, newTask};
+function createTaskElement(todo) {
+    const taskContainer = document.createElement("div");
+    taskContainer.classList.add("main__container--task");
+    main.appendChild(taskContainer);
+
+    const checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    taskContainer.appendChild(checkbox);
+
+    const labelName = document.createElement("label");
+    labelName.innerHTML = todo.todoName;
+    labelName.classList.add("task-name");
+    taskContainer.appendChild(labelName);
+
+    const btnEditTask = document.createElement("button");
+    btnEditTask.setAttribute("type", "button");
+    btnEditTask.classList.add("main__button--edit");
+    taskContainer.appendChild(btnEditTask);
+
+    const btnDelTask = document.createElement("button");
+    btnDelTask.setAttribute("type", "button");
+    btnDelTask.classList.add("main__button--delete");
+    taskContainer.appendChild(btnDelTask);
+
+    const taskInfo = document.createElement("div");
+    taskInfo.classList.add("main__container--info");
+    taskContainer.appendChild(taskInfo);
+
+    const name = document.createElement("p");
+    name.innerHTML = "Name";
+    name.classList.add("title--info");
+    taskInfo.appendChild(name);
+
+    const taskName = document.createElement("p");
+    taskName.innerHTML = todo.todoName;
+    taskInfo.appendChild(taskName);
+    taskName.classList.add("info");
+
+    const description = document.createElement("p");
+    description.innerHTML = "Description";
+    description.classList.add("title--info");
+    taskInfo.appendChild(description);
+
+    const taskDes = document.createElement("p");
+    taskDes.innerHTML = todo.todoDescript;
+    taskInfo.appendChild(taskDes);
+    taskDes.classList.add("info");
+
+    const duedate = document.createElement("p");
+    duedate.innerHTML = "Due-date";
+    duedate.classList.add("title--info");
+    taskInfo.appendChild(duedate);
+
+    const taskDate = document.createElement("p");
+    taskDate.innerHTML = todo.todoDueDate;
+    taskInfo.appendChild(taskDate);
+    taskDes.classList.add("info");
+
+    const priority = document.createElement("p");
+    priority.innerHTML = "Priority";
+    priority.classList.add("title--info");
+    taskInfo.appendChild(priority);
+
+    const taskPriority = document.createElement("p");
+    taskPriority.innerHTML = todo.todoPriority;
+    taskInfo.appendChild(taskPriority);
+    taskDes.classList.add("info");
+}
+
+export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, clearProjectForm, newTask };

@@ -90,9 +90,21 @@ aside {
 }
 
 .main__button--edit {
+    background-image: url(images/lapiz.png);
     margin-left: 2rem;
     margin-right: 0.4rem;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
 }
+
+.main__button--delete{
+    background-image: url(images/bote-de-basura.png);
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
 
 .task-name {
     margin-left: 0.4rem;
