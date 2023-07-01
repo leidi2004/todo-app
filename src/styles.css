@@ -52,6 +52,10 @@ aside {
     margin-left: 2.5rem;
 }
 
+.aside__item:hover, .main__h2:hover, .task-name:hover, button:hover {
+    cursor: pointer;
+}
+
 .aside__button {
     margin-top: 1rem;
     font-size: 1.3rem;
@@ -81,6 +85,7 @@ aside {
 }
 
 .main__container--task{
+    display: block;
     margin-bottom: 0.5rem;
 }
 

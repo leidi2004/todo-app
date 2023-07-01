@@ -1,5 +1,5 @@
 import './../styles.css';
-import { showMenu, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject} from './ui';
+import { showMenu, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, newTask} from './ui';
 import { project, todo} from './todo';
 console.log("it still works don't worry");
 const btnMenu = document.querySelector(".header__button--menu");
@@ -31,3 +31,7 @@ const proInvox = new project("Inbox");
 const btnSubProject = document.querySelector(".submit__project");
 
 btnSubProject.addEventListener("click", createProject);
+
+const btnCreateTask = document.getElementById("create-task");
+btnCreateTask.addEventListener("click", newTask);
+

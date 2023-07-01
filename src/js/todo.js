@@ -1,61 +1,52 @@
 class todo {
 
-    constructor(todoName, todoDescript, todoDueDate, todoPriority, todoNote, todoState) {
+    constructor(todoName, todoDescript, todoDueDate, todoPriority, todoState) {
         this.todoName = todoName;
         this.todoDescript = todoDescript;
         this.todoDueDate = todoDueDate;
         this.todoPriority = todoPriority;
-        this.todoNote = todoNote;
         this.todoState = false;
     }
 
     set todoName(newName) {
-        this.todoName = newName;
+        this._todoName = newName;
     }
-
+    
     get todoName() {
-        return this.todoName;
+        return this._todoName;
     }
-
+    
     set todoDescript(newDescript) {
-        this.todoDescript = newDescript;
+        this._todoDescript = newDescript;
     }
-
+    
     get todoDescript() {
-        return this.todoDescript;
+        return this._todoDescript;
     }
-
+    
     set todoDueDate(newDueDate) {
-        this.todoDueDate = newDueDate;
+        this._todoDueDate = newDueDate;
     }
-
+    
     get todoDueDate() {
-        return this.todoDueDate;
+        return this._todoDueDate;
     }
-
+    
     set todoPriority(newPriority) {
-        this.todoPriority = newPriority;
+        this._todoPriority = newPriority;
     }
-
+    
     get todoPriority() {
-        return this.todoPriority;
+        return this._todoPriority;
     }
-
-    set todoNote(newNote) {
-        this._todoNote = newNote;
-    }
-
-    get todoNote() {
-        return this.todoNote;
-    }
-
+    
     set todoState(newState) {
-        this.todoState = newState;
+        this._todoState = newState;
     }
-
+    
     get todoState() {
-        return this.todoState;
-    }
+        return this._todoState;
+    }  
 
     editTodo(newName, newDescript, newDueDate, newPriority, newNote, newState) {
         this.todoName = newName;

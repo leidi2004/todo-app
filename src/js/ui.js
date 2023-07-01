@@ -1,5 +1,5 @@
 import 'animate.css';
-import { project} from './todo';
+import { project, todo} from './todo';
 //Elements for the event listener of the menu
 const menu = document.querySelector("aside");
 const main = document.querySelector("main");
@@ -67,10 +67,28 @@ function clearProjectForm() {
     const projectName = document.getElementById("project-name").value = "";
 }
 
+let projects = [];
+const projectOptions = document.getElementById("project-option");
+const newLocation = document.getElementById("newLocation");
+
 function createProject(e) {
-    e.preventDefault();
+    e.preventDefault(); 
+
     const projectName = document.getElementById("project-name").value;
-    const pro = new project(projectName);
+    const newProject = new project(projectName);
+    projects.push(newProject);
+
+    const projectOption = document.createElement("option");
+    projectOption.innerHTML = projectName;
+    projectOption.setAttribute("value", projectName);
+
+    const cloneOption1 = projectOption.cloneNode(true);
+    const cloneOption2 = projectOption.cloneNode(true);
+
+    projectOptions.appendChild(cloneOption1);
+    newLocation.appendChild(cloneOption2);
+
+    console.log(projectOption.value);
     removeForm();
     createElementProject(projectName);
     clearProjectForm();
@@ -82,6 +100,33 @@ function createElementProject(element) {
     projectElement.innerHTML = element;
     projectElement.classList.add("aside__item");
     projectList.appendChild(projectElement);
+
+    projectElement.addEventListener("click", showProject);
 }
 
-export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, clearProjectForm };
+const title = document.querySelector(".main__h2");
+
+function showProject(){
+    //el nombre del proyecto que fue clicado
+    const projectName = this.innerHTML;
+    title.innerHTML = projectName;
+    const project = projects.find(pro => pro.projectName === projectName);
+    console.log(project);
+    console.log(project.todos);
+}
+
+function newTask(e){
+    e.preventDefault();
+    const name = document.getElementById("task-name").value;
+    const description = document.getElementById("task-description").value;
+    const taskDueDate = document.getElementById("task-duedate").value;
+    const taskPriority = document.getElementById("task-priority").value;
+    const taskUbication = document.getElementById("project-option").value;
+    const project = projects.find(pro => pro.projectName === taskUbication);
+    const newTodo = new todo(name, description, taskDueDate, taskPriority);
+    project.todos.push(newTodo);
+    console.log(newTodo);
+    console.log(project.todos);
+}
+
+export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, clearProjectForm, newTask};
