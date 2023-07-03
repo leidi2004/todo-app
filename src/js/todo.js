@@ -1,10 +1,11 @@
 class todo {
 
-    constructor(todoName, todoDescript, todoDueDate, todoPriority, todoState) {
+    constructor(todoName, todoDescript, todoDueDate, todoPriority, id, todoState) {
         this.todoName = todoName;
         this.todoDescript = todoDescript;
         this.todoDueDate = todoDueDate;
         this.todoPriority = todoPriority;
+        this.id = id;
         this.todoState = false;
     }
 
@@ -46,7 +47,15 @@ class todo {
     
     get todoState() {
         return this._todoState;
-    }  
+    } 
+
+    get id() {
+        return this._id;
+    }
+    
+    set id(newId) {
+        this._id = newId;
+    }
 
     editTodo(newName, newDescript, newDueDate, newPriority, newNote, newState) {
         this.todoName = newName;
@@ -59,8 +68,9 @@ class todo {
 }
 
 class project {
-    constructor(projectName) {
+    constructor(projectName, projectID) {
         this.projectName = projectName;
+        this.projectID = projectID;
         this.todos = [];
     }
 
@@ -70,6 +80,14 @@ class project {
 
     set projectName(newName) {
         this._projectName = newName;
+    }
+
+    get projectID() {
+        return this._projectID;
+    }
+
+    set projectID(newProjectID) {
+        this._projectID = newProjectID;
     }
 
     addTask(todo) {

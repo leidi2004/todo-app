@@ -71,11 +71,12 @@ let projects = [];
 const projectOptions = document.getElementById("project-option");
 const newLocation = document.getElementById("newLocation");
 
+let projectId = 0;
+
 function createProject(e) {
     e.preventDefault();
-
     const projectName = document.getElementById("project-name").value;
-    const newProject = new project(projectName);
+    const newProject = new project(projectName, projectId);
     projects.push(newProject);
 
     const projectOption = document.createElement("option");
@@ -92,6 +93,8 @@ function createProject(e) {
     removeForm();
     createElementProject(projectName);
     clearProjectForm();
+    console.table(newProject);
+    projectId++;
 }
 
 function createElementProject(element) {
@@ -99,21 +102,28 @@ function createElementProject(element) {
     const projectElement = document.createElement("li");
     projectElement.innerHTML = element;
     projectElement.classList.add("aside__item");
+    projectElement.setAttribute("data-project-id", project.projectId);
     projectList.appendChild(projectElement);
-
     projectElement.addEventListener("click", showProject);
 }
 
 const title = document.querySelector(".main__h2");
 
 function showProject() {
+    const projectId = this.getAttribute("data-project-id");
     //el nombre del proyecto que fue clicado
     const projectName = this.innerHTML;
     title.innerHTML = projectName;
     const project = projects.find(pro => pro.projectName === projectName);
     console.log(project);
     console.log(project.todos);
+    const tasks = project.todos.filter((todo) => todo.projectId === projectId);
+    tasks.forEach((task) => {
+        createTaskElement(task);
+    });
 }
+
+let taskId = 0;
 
 function newTask(e) {
     e.preventDefault();
@@ -121,13 +131,13 @@ function newTask(e) {
     const description = document.getElementById("task-description").value;
     const taskDueDate = document.getElementById("task-duedate").value;
     const taskPriority = document.getElementById("task-priority").value;
-    const taskUbication = document.getElementById("project-option").value;
-    const project = projects.find(pro => pro.projectName === taskUbication);
-    const newTodo = new todo(name, description, taskDueDate, taskPriority);
+    const taskLocation = document.getElementById("project-option").value;
+    const project = projects.find(pro => pro.projectName === taskLocation);
+    const newTodo = new todo(name, description, taskDueDate, taskPriority, taskId);
     project.todos.push(newTodo);
-    console.log(newTodo);
-    console.log(project.todos);
-    createTaskElement(newTodo);
+    console.table(newTodo);
+    console.table(project.todos);
+    taskId++;
 }
 
 function createTaskElement(todo) {
@@ -186,7 +196,7 @@ function createTaskElement(todo) {
     const taskDate = document.createElement("p");
     taskDate.innerHTML = todo.todoDueDate;
     taskInfo.appendChild(taskDate);
-    taskDes.classList.add("info");
+    taskDate.classList.add("info");
 
     const priority = document.createElement("p");
     priority.innerHTML = "Priority";
@@ -196,7 +206,11 @@ function createTaskElement(todo) {
     const taskPriority = document.createElement("p");
     taskPriority.innerHTML = todo.todoPriority;
     taskInfo.appendChild(taskPriority);
-    taskDes.classList.add("info");
+    taskPriority.classList.add("info");
+
+    labelName.addEventListener("click", ()=>{
+        taskInfo.classList.toggle("main__container--info--visible");
+    });
 }
 
 export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, clearProjectForm, newTask };
