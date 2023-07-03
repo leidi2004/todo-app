@@ -100,26 +100,31 @@ function createProject(e) {
 function createElementProject(element) {
     const projectList = document.querySelector(".aside__ul");
     const projectElement = document.createElement("li");
-    projectElement.innerHTML = element;
+    projectElement.textContent = element;
     projectElement.classList.add("aside__item");
     projectElement.setAttribute("data-project-id", project.projectId);
     projectList.appendChild(projectElement);
     projectElement.addEventListener("click", showProject);
 }
 
-const title = document.querySelector(".main__h2");
+function cleanMain(){
+    const main = document.querySelector(".main");
+    const title = main.querySelector("h2");
+    while (main.lastChild !== title) {
+        main.removeChild(main.lastChild);
+    }
+}
 
 function showProject() {
-    const projectId = this.getAttribute("data-project-id");
     //el nombre del proyecto que fue clicado
-    const projectName = this.innerHTML;
-    title.innerHTML = projectName;
+    cleanMain();
+    const projectName = this.textContent;
+    title.textContent = projectName;
     const project = projects.find(pro => pro.projectName === projectName);
     console.log(project);
     console.log(project.todos);
-    const tasks = project.todos.filter((todo) => todo.projectId === projectId);
-    tasks.forEach((task) => {
-        createTaskElement(task);
+    project.todos.forEach((todo) => {
+        createTaskElement(todo);
     });
 }
 
@@ -208,7 +213,7 @@ function createTaskElement(todo) {
     taskInfo.appendChild(taskPriority);
     taskPriority.classList.add("info");
 
-    labelName.addEventListener("click", ()=>{
+    labelName.addEventListener("click", () => {
         taskInfo.classList.toggle("main__container--info--visible");
     });
 }

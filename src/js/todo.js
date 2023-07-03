@@ -94,25 +94,11 @@ class project {
         this.todos.push(todo);
     }
 
-    showTasks() {
-        this.todos.forEach(todo => {
-            console.log(todo);
-        });
-    }
-
     removeTask(todo) {
         const index = this.todos.indexOf(todo);
         if (index !== -1) {
             this.todos.splice(index, 1);
         }
-    }
-
-    deleteProject() {
-        this.projectName = [];
-    }
-
-    editProjectName(newName) {
-        this.projectName = newName;
     }
 }
 
