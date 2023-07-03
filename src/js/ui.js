@@ -109,7 +109,7 @@ function createElementProject(element) {
 
 const title = document.querySelector(".main__h2");
 
-function cleanMain(){
+function cleanMain() {
     const main = document.querySelector(".main");
     while (main.lastChild !== title) {
         main.removeChild(main.lastChild);
@@ -144,6 +144,12 @@ function newTask(e) {
     console.table(newTodo);
     console.table(project.todos);
     taskId++;
+
+    const currentTitle = title.textContent;
+
+    if (taskLocation === currentTitle) {
+        createTaskElement(newTodo);
+    }
 }
 
 function createTaskElement(todo) {
