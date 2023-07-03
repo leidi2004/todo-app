@@ -107,9 +107,10 @@ function createElementProject(element) {
     projectElement.addEventListener("click", showProject);
 }
 
+const title = document.querySelector(".main__h2");
+
 function cleanMain(){
     const main = document.querySelector(".main");
-    const title = main.querySelector("h2");
     while (main.lastChild !== title) {
         main.removeChild(main.lastChild);
     }
