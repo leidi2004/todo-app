@@ -54,12 +54,15 @@ function removeForm() {
     body.classList.remove("lostfocus");
     if (formAddTask.classList.contains("form-visible")) {
         formAddTask.classList.remove("form-visible");
+        clearForm();
     } else if (formAddProject.classList.contains("form--addProject-visible")) {
         menu.classList.remove("lostfocus");
         btnShowProjectForm.classList.remove("lostfocus");
         formAddProject.classList.remove("form--addProject-visible");
+        clearProjectForm();
     } else if (formEditTask.classList.contains("form-visible")) {
         formEditTask.classList.remove("form-visible");
+        clearForm();
     }
 }
 
@@ -150,6 +153,9 @@ function newTask(e) {
     if (taskLocation === currentTitle) {
         createTaskElement(newTodo);
     }
+
+    clearForm();
+    removeForm();
 }
 
 function createTaskElement(todo) {
@@ -171,6 +177,8 @@ function createTaskElement(todo) {
     btnEditTask.classList.add("main__button--edit");
     taskContainer.appendChild(btnEditTask);
 
+    btnEditTask.addEventListener("click", showEditTaskForm);
+    
     const btnDelTask = document.createElement("button");
     btnDelTask.setAttribute("type", "button");
     btnDelTask.classList.add("main__button--delete");
@@ -225,4 +233,11 @@ function createTaskElement(todo) {
     });
 }
 
-export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, clearProjectForm, newTask };
+function clearForm() {
+    const inputs = document.querySelectorAll(".form__input");
+    inputs.forEach(input => {
+        input.value = "";
+    });
+}
+
+export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, clearProjectForm, newTask};

@@ -19,13 +19,6 @@ const btnShowProjectForm = document.querySelector(".aside__button");
 
 btnShowProjectForm.addEventListener("click", showAddProjectForm);
 
-const btnShowEditTaskForm = document.querySelectorAll(".main__button--edit");
-
-btnShowEditTaskForm.forEach(btnShowEditTaskForm => {
-    btnShowEditTaskForm.addEventListener("click", showEditTaskForm);
-});
-
-
 const proInvox = new project("Inbox");
 
 const btnSubProject = document.querySelector(".submit__project");
@@ -34,4 +27,5 @@ btnSubProject.addEventListener("click", createProject);
 
 const btnCreateTask = document.getElementById("create-task");
 btnCreateTask.addEventListener("click", newTask);
+
 
