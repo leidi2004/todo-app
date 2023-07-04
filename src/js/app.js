@@ -1,7 +1,10 @@
 import './../styles.css';
-import { showMenu, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, newTask} from './ui';
-import { project, todo} from './todo';
+import { showMenu, showAddTaskForm, removeForm, showAddProjectForm, createProject, newTask, createDefaultProject} from './ui';
+
 console.log("it still works don't worry");
+
+createDefaultProject();
+
 const btnMenu = document.querySelector(".header__button--menu");
 btnMenu.addEventListener("click", showMenu);
 
@@ -18,8 +21,6 @@ btnExit.forEach(btnExit => {
 const btnShowProjectForm = document.querySelector(".aside__button");
 
 btnShowProjectForm.addEventListener("click", showAddProjectForm);
-
-const proInvox = new project("Inbox");
 
 const btnSubProject = document.querySelector(".submit__project");
 

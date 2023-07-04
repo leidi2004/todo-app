@@ -76,6 +76,31 @@ const newLocation = document.getElementById("newLocation");
 
 let projectId = 0;
 
+function createDefaultProject(){
+    const proInvox = new project("Inbox", projectId);
+    projects.push(proInvox);
+
+    const projectList = document.querySelector(".aside__ul");
+    const projectElement = document.createElement("li");
+    projectElement.textContent = proInvox.projectName;
+    projectElement.classList.add("aside__item");
+    projectElement.setAttribute("data-project-id", project.projectId);
+    projectList.appendChild(projectElement);
+    projectElement.addEventListener("click", showProject);
+    
+    const projectOption = document.createElement("option");
+    projectOption.innerHTML = proInvox.projectName;
+    projectOption.setAttribute("value", proInvox.projectName);
+
+    const cloneOption1 = projectOption.cloneNode(true);
+    const cloneOption2 = projectOption.cloneNode(true);
+
+    projectOptions.appendChild(cloneOption1);
+    newLocation.appendChild(cloneOption2);
+    
+    projectId++;
+}
+
 function createProject(e) {
     e.preventDefault();
     const projectName = document.getElementById("project-name").value;
@@ -178,7 +203,7 @@ function createTaskElement(todo) {
     taskContainer.appendChild(btnEditTask);
 
     btnEditTask.addEventListener("click", showEditTaskForm);
-    
+
     const btnDelTask = document.createElement("button");
     btnDelTask.setAttribute("type", "button");
     btnDelTask.classList.add("main__button--delete");
@@ -240,4 +265,4 @@ function clearForm() {
     });
 }
 
-export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, showEditTaskForm, createProject, clearProjectForm, newTask};
+export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, createProject, clearProjectForm, newTask, createDefaultProject};
