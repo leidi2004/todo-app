@@ -153,7 +153,7 @@ function showProject() {
     console.log(project);
     console.log(project.todos);
     project.todos.forEach((todo) => {
-        createTaskElement(todo);
+        createTaskElement(todo, project);
     });
 }
 
@@ -176,14 +176,14 @@ function newTask(e) {
     const currentTitle = title.textContent;
 
     if (taskLocation === currentTitle) {
-        createTaskElement(newTodo);
+        createTaskElement(newTodo, project);
     }
 
     clearForm();
     removeForm();
 }
 
-function createTaskElement(todo) {
+function createTaskElement(todo, project) {
     const taskContainer = document.createElement("div");
     taskContainer.classList.add("main__container--task");
     main.appendChild(taskContainer);
@@ -208,6 +208,10 @@ function createTaskElement(todo) {
     btnDelTask.setAttribute("type", "button");
     btnDelTask.classList.add("main__button--delete");
     taskContainer.appendChild(btnDelTask);
+
+    btnDelTask.addEventListener("click", function(){
+        deleteTask(project, todo, taskContainer);
+    });
 
     const taskInfo = document.createElement("div");
     taskInfo.classList.add("main__container--info");
@@ -263,6 +267,11 @@ function clearForm() {
     inputs.forEach(input => {
         input.value = "";
     });
+}
+
+function deleteTask(project, todo, taskContainer){
+    project.removeTask(todo);
+    taskContainer.remove();
 }
 
 export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, createProject, clearProjectForm, newTask, createDefaultProject};
