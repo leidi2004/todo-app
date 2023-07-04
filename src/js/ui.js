@@ -75,6 +75,7 @@ const projectOptions = document.getElementById("project-option");
 const newLocation = document.getElementById("newLocation");
 
 let projectId = 0;
+const title = document.querySelector(".main__h2");
 
 function createDefaultProject(){
     const proInvox = new project("Inbox", projectId);
@@ -97,8 +98,13 @@ function createDefaultProject(){
 
     projectOptions.appendChild(cloneOption1);
     newLocation.appendChild(cloneOption2);
-    
+
     projectId++;
+
+    title.textContent = proInvox.projectName;
+    proInvox.todos.forEach((todo) => {
+    createTaskElement(todo, proInvox);
+    });
 }
 
 function createProject(e) {
@@ -135,7 +141,6 @@ function createElementProject(element) {
     projectElement.addEventListener("click", showProject);
 }
 
-const title = document.querySelector(".main__h2");
 
 function cleanMain() {
     const main = document.querySelector(".main");
