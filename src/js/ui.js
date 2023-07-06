@@ -45,15 +45,18 @@ function showAddProjectForm() {
 
 const formEditTask = document.querySelector(".form--edittask");
 
-function showTaskInfo(todo){
-    const newName = document.getElementById("newName");
-    newName.innerHTML = todo.name;
-}
-
-function showEditTaskForm(todo) {
-    showTaskInfo(todo);
+function showEditTaskForm() {
     formEditTask.classList.add("form-visible");
     body.classList.add("lostfocus");
+}
+
+function EditTodo(todo){
+    showEditTaskForm();
+    const newName = document.getElementById("newName").value = todo.todoName;
+    const newDescript = document.getElementById("newDescription").value = todo.todoDescript;
+    const newDueDate = document.getElementById("newDueDate").value = todo.todoDueDate;
+    const newPriority = document.getElementById("newPriority").value = todo.todoPriority;
+    
 }
 
 function removeForm() {
@@ -212,11 +215,9 @@ function createTaskElement(todo, project) {
         if (checkbox.checked) {
             todo.todoState = "Finsihed";
             labelName.classList.add("finished-task");
-            console.log(todo);
         } else {
             todo.todoState = "Not finsihed";
             labelName.classList.remove("finished-task");
-            console.log(todo)
         }
     });
 
@@ -225,7 +226,9 @@ function createTaskElement(todo, project) {
     btnEditTask.classList.add("main__button--edit");
     taskContainer.appendChild(btnEditTask);
 
-    btnEditTask.addEventListener("click", showEditTaskForm(todo));
+    btnEditTask.addEventListener("click", function(){
+        EditTodo(todo)
+    });
 
     const btnDelTask = document.createElement("button");
     btnDelTask.setAttribute("type", "button");
