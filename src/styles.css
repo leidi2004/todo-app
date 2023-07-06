@@ -238,4 +238,9 @@ select {
     padding: 0.6rem;
 }
 
+.finished-task{
+    text-decoration: line-through;
+    color: lightslategray;
+}
+
 @media(min-width: 800px) {}

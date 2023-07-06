@@ -45,7 +45,13 @@ function showAddProjectForm() {
 
 const formEditTask = document.querySelector(".form--edittask");
 
-function showEditTaskForm() {
+function showTaskInfo(todo){
+    const newName = document.getElementById("newName");
+    newName.innerHTML = todo.name;
+}
+
+function showEditTaskForm(todo) {
+    showTaskInfo(todo);
     formEditTask.classList.add("form-visible");
     body.classList.add("lostfocus");
 }
@@ -77,7 +83,7 @@ const newLocation = document.getElementById("newLocation");
 let projectId = 0;
 const title = document.querySelector(".main__h2");
 
-function createDefaultProject(){
+function createDefaultProject() {
     const proInvox = new project("Inbox", projectId);
     projects.push(proInvox);
 
@@ -88,7 +94,7 @@ function createDefaultProject(){
     projectElement.setAttribute("data-project-id", project.projectId);
     projectList.appendChild(projectElement);
     projectElement.addEventListener("click", showProject);
-    
+
     const projectOption = document.createElement("option");
     projectOption.innerHTML = proInvox.projectName;
     projectOption.setAttribute("value", proInvox.projectName);
@@ -103,7 +109,7 @@ function createDefaultProject(){
 
     title.textContent = proInvox.projectName;
     proInvox.todos.forEach((todo) => {
-    createTaskElement(todo, proInvox);
+        createTaskElement(todo, proInvox);
     });
 }
 
@@ -202,19 +208,31 @@ function createTaskElement(todo, project) {
     labelName.classList.add("task-name");
     taskContainer.appendChild(labelName);
 
+    checkbox.addEventListener("change", function () {
+        if (checkbox.checked) {
+            todo.todoState = "Finsihed";
+            labelName.classList.add("finished-task");
+            console.log(todo);
+        } else {
+            todo.todoState = "Not finsihed";
+            labelName.classList.remove("finished-task");
+            console.log(todo)
+        }
+    });
+
     const btnEditTask = document.createElement("button");
     btnEditTask.setAttribute("type", "button");
     btnEditTask.classList.add("main__button--edit");
     taskContainer.appendChild(btnEditTask);
 
-    btnEditTask.addEventListener("click", showEditTaskForm);
+    btnEditTask.addEventListener("click", showEditTaskForm(todo));
 
     const btnDelTask = document.createElement("button");
     btnDelTask.setAttribute("type", "button");
     btnDelTask.classList.add("main__button--delete");
     taskContainer.appendChild(btnDelTask);
 
-    btnDelTask.addEventListener("click", function(){
+    btnDelTask.addEventListener("click", function () {
         deleteTask(project, todo, taskContainer);
     });
 
@@ -274,9 +292,9 @@ function clearForm() {
     });
 }
 
-function deleteTask(project, todo, taskContainer){
+function deleteTask(project, todo, taskContainer) {
     project.removeTask(todo);
     taskContainer.remove();
 }
 
-export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, createProject, clearProjectForm, newTask, createDefaultProject};
+export { showMenu, isSlideOut, showAddTaskForm, removeForm, showAddProjectForm, createProject, clearProjectForm, newTask, createDefaultProject };
