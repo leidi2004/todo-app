@@ -50,15 +50,6 @@ function showEditTaskForm() {
     body.classList.add("lostfocus");
 }
 
-function EditTodo(todo){
-    showEditTaskForm();
-    const newName = document.getElementById("newName").value = todo.todoName;
-    const newDescript = document.getElementById("newDescription").value = todo.todoDescript;
-    const newDueDate = document.getElementById("newDueDate").value = todo.todoDueDate;
-    const newPriority = document.getElementById("newPriority").value = todo.todoPriority;
-    
-}
-
 function removeForm() {
     body.classList.remove("lostfocus");
     if (formAddTask.classList.contains("form-visible")) {
@@ -195,6 +186,7 @@ function newTask(e) {
 
     clearForm();
     removeForm();
+
 }
 
 function createTaskElement(todo, project) {
@@ -225,10 +217,6 @@ function createTaskElement(todo, project) {
     btnEditTask.setAttribute("type", "button");
     btnEditTask.classList.add("main__button--edit");
     taskContainer.appendChild(btnEditTask);
-
-    btnEditTask.addEventListener("click", function(){
-        EditTodo(todo)
-    });
 
     const btnDelTask = document.createElement("button");
     btnDelTask.setAttribute("type", "button");
@@ -286,7 +274,72 @@ function createTaskElement(todo, project) {
     labelName.addEventListener("click", () => {
         taskInfo.classList.toggle("main__container--info--visible");
     });
+
+    btnEditTask.addEventListener("click", function () {
+        EditTodo(todo, labelName, taskName, taskDes, taskDate, taskPriority)
+    });
+
+    function newTask(e) {
+        e.preventDefault();
+        const name = document.getElementById("task-name").value;
+        const description = document.getElementById("task-description").value;
+        const taskDueDate = document.getElementById("task-duedate").value;
+        const taskPriority = document.getElementById("task-priority").value;
+        const taskLocation = document.getElementById("project-option").value;
+        const project = projects.find(pro => pro.projectName === taskLocation);
+        const newTodo = new todo(name, description, taskDueDate, taskPriority, taskId);
+        project.todos.push(newTodo);
+        console.table(newTodo);
+        console.table(project.todos);
+        taskId++;
+
+        const currentTitle = title.textContent;
+
+        if (taskLocation === currentTitle) {
+            createTaskElement(newTodo, project);
+        }
+
+        clearForm();
+        removeForm();
+
+    }
 }
+
+function EditTodo(todo, labelName, taskName, taskDes, taskDate, taskPriority) {
+    showEditTaskForm();
+    const nameInput = document.getElementById("newName");
+    const descriptInput = document.getElementById("newDescription");
+    const dueDateInput = document.getElementById("newDueDate");
+    const priorityInput = document.getElementById("newPriority");
+  
+    nameInput.value = todo.todoName;
+    descriptInput.value = todo.todoDescript;
+    dueDateInput.value = todo.todoDueDate;
+    priorityInput.value = todo.todoPriority;
+  
+    const btnEditTask = document.querySelector(".edit-project");
+    btnEditTask.addEventListener("click", handleEditClick);
+  
+    function handleEditClick(e) {
+      e.preventDefault();
+      const newName = nameInput.value;
+      const newDescript = descriptInput.value;
+      const newDueDate = dueDateInput.value;
+      const newPriority = priorityInput.value;
+  
+      todo.editTodo(newName, newDescript, newDueDate, newPriority);
+  
+      labelName.textContent = newName;
+      taskName.textContent = newName;
+      taskDes.textContent = newDescript;
+      taskDate.textContent = newDueDate;
+      taskPriority.textContent = newPriority;
+  
+      removeForm();
+      btnEditTask.removeEventListener("click", handleEditClick);
+    }
+  }
+  
 
 function clearForm() {
     const inputs = document.querySelectorAll(".form__input");

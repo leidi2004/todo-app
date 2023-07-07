@@ -57,13 +57,11 @@ class todo {
         this._id = newId;
     }
 
-    editTodo(newName, newDescript, newDueDate, newPriority, newNote, newState) {
+    editTodo(newName, newDescript, newDueDate, newPriority) {
         this.todoName = newName;
         this.todoDescript = newDescript;
         this.todoDueDate = newDueDate;
         this.todoPriority = newPriority;
-        this.todoNote = newNote;
-        this.todoState = newState;
     }
 }
 
